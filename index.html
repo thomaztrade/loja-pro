@@ -4,27 +4,27 @@
 <meta charset="UTF-8">
 <title>Loja Pro - Simulador de Renda</title>
 <style>
-    body { margin: 0; font-family: Arial, sans-serif; background: #f4f4f4; color: #333; }
-    header { background: #1a73e8; color: white; padding: 20px; text-align: center; }
-    h1 { margin: 0; }
-    .dashboard { display: flex; justify-content: space-around; margin: 20px; flex-wrap: wrap; }
-    .dashboard div { background: #fff; padding: 15px; border-radius: 10px; width: 200px; text-align: center; box-shadow: 0 2px 5px rgba(0,0,0,0.2); margin: 10px; }
-    .container { display: flex; flex-wrap: wrap; justify-content: center; margin: 20px; }
-    .product { background: white; border-radius: 10px; box-shadow: 0 2px 5px rgba(0,0,0,0.2); margin: 10px; padding: 15px; width: 200px; text-align: center; }
-    .product img { max-width: 100%; border-radius: 10px; }
-    .product button { background: #1a73e8; color: white; border: none; padding: 10px; margin-top: 10px; cursor: pointer; border-radius: 5px; }
-    .cart { position: fixed; top: 20px; right: 20px; background: #ff6600; color: white; padding: 15px; border-radius: 10px; cursor: pointer; z-index: 10; }
-    #cart-items { display: none; position: fixed; top: 70px; right: 20px; background: white; color: #333; padding: 15px; border-radius: 10px; width: 300px; box-shadow: 0 2px 10px rgba(0,0,0,0.3); max-height: 400px; overflow-y: auto; z-index: 10; }
-    #cart-items ul { list-style: none; padding: 0; margin: 0; }
-    #cart-items li { margin-bottom: 10px; }
-    #cart-items button { background: #ff3300; color: white; border: none; padding: 5px 10px; cursor: pointer; border-radius: 5px; float: right; }
-    #cart-items .total { font-weight: bold; margin-top: 10px; display: block; }
-    canvas { background: #fff; border-radius: 10px; margin: 20px; }
-    .login-box { margin: 20px; text-align: center; }
-    .login-box input { padding: 10px; margin: 5px; width: 150px; }
-    .login-box button { padding: 10px 20px; margin-left: 10px; }
-    .category { margin: 10px; padding: 10px 15px; background: #1a73e8; color: white; border-radius: 5px; cursor: pointer; display: inline-block; }
-    .category.active { background: #ff6600; }
+body { margin: 0; font-family: Arial, sans-serif; background: #f4f4f4; color: #333; }
+header { background: #1a73e8; color: white; padding: 20px; text-align: center; }
+h1 { margin: 0; }
+.dashboard { display: flex; justify-content: space-around; margin: 20px; flex-wrap: wrap; }
+.dashboard div { background: #fff; padding: 15px; border-radius: 10px; width: 200px; text-align: center; box-shadow: 0 2px 5px rgba(0,0,0,0.2); margin: 10px; }
+.container { display: flex; flex-wrap: wrap; justify-content: center; margin: 20px; }
+.product { background: white; border-radius: 10px; box-shadow: 0 2px 5px rgba(0,0,0,0.2); margin: 10px; padding: 15px; width: 200px; text-align: center; }
+.product img { max-width: 100%; border-radius: 10px; }
+.product button { background: #1a73e8; color: white; border: none; padding: 10px; margin-top: 10px; cursor: pointer; border-radius: 5px; }
+.cart { position: fixed; top: 20px; right: 20px; background: #ff6600; color: white; padding: 15px; border-radius: 10px; cursor: pointer; z-index: 10; }
+#cart-items { display: none; position: fixed; top: 70px; right: 20px; background: white; color: #333; padding: 15px; border-radius: 10px; width: 300px; box-shadow: 0 2px 10px rgba(0,0,0,0.3); max-height: 400px; overflow-y: auto; z-index: 10; }
+#cart-items ul { list-style: none; padding: 0; margin: 0; }
+#cart-items li { margin-bottom: 10px; }
+#cart-items button { background: #ff3300; color: white; border: none; padding: 5px 10px; cursor: pointer; border-radius: 5px; float: right; }
+#cart-items .total { font-weight: bold; margin-top: 10px; display: block; }
+canvas { background: #fff; border-radius: 10px; margin: 20px; }
+.login-box { margin: 20px; text-align: center; }
+.login-box input { padding: 10px; margin: 5px; width: 150px; }
+.login-box button { padding: 10px 20px; margin-left: 10px; }
+.category { margin: 10px; padding: 10px 15px; background: #1a73e8; color: white; border-radius: 5px; cursor: pointer; display: inline-block; }
+.category.active { background: #ff6600; }
 </style>
 </head>
 <body>
@@ -66,149 +66,133 @@
 <canvas id="salesChart" width="600" height="300"></canvas>
 
 <script>
-    // Produtos
-    const products = [
-        {id:1, name:"Camiseta Criativa", price:25, img:"https://via.placeholder.com/150?text=Camiseta", category:"Roupas"},
-        {id:2, name:"Caneca Colorida", price:15, img:"https://via.placeholder.com/150?text=Caneca", category:"Casa"},
-        {id:3, name:"Boné Estiloso", price:20, img:"https://via.placeholder.com/150?text=Bone", category:"Roupas"},
-        {id:4, name:"Agenda Digital", price:30, img:"https://via.placeholder.com/150?text=Agenda", category:"Escritório"},
-        {id:5, name:"Fone Bluetooth", price:50, img:"https://via.placeholder.com/150?text=Fone", category:"Eletrônicos"},
-        {id:6, name:"Caneta Premium", price:10, img:"https://via.placeholder.com/150?text=Caneta", category:"Escritório"},
-        {id:7, name:"Mochila Escolar", price:35, img:"https://via.placeholder.com/150?text=Mochila", category:"Roupas"}
-    ];
+const products = [
+    {id:1,name:"Camiseta Criativa",price:25,img:"https://via.placeholder.com/150?text=Camiseta",category:"Roupas"},
+    {id:2,name:"Caneca Colorida",price:15,img:"https://via.placeholder.com/150?text=Caneca",category:"Casa"},
+    {id:3,name:"Boné Estiloso",price:20,img:"https://via.placeholder.com/150?text=Bone",category:"Roupas"},
+    {id:4,name:"Agenda Digital",price:30,img:"https://via.placeholder.com/150?text=Agenda",category:"Escritório"},
+    {id:5,name:"Fone Bluetooth",price:50,img:"https://via.placeholder.com/150?text=Fone",category:"Eletrônicos"},
+    {id:6,name:"Caneta Premium",price:10,img:"https://via.placeholder.com/150?text=Caneta",category:"Escritório"},
+    {id:7,name:"Mochila Escolar",price:35,img:"https://via.placeholder.com/150?text=Mochila",category:"Roupas"}
+];
 
-    // Dados do usuário
-    let username = "";
-    let cart = JSON.parse(localStorage.getItem("cart")) || [];
-    let balance = parseFloat(localStorage.getItem("balance")) || 10000;
-    let totalSales = parseFloat(localStorage.getItem("totalSales")) || 0;
-    let salesHistory = JSON.parse(localStorage.getItem("salesHistory")) || [totalSales];
-    let currentCategory = "Todos";
+let username="",cart=JSON.parse(localStorage.getItem("cart"))||[],balance=parseFloat(localStorage.getItem("balance"))||10000,totalSales=parseFloat(localStorage.getItem("totalSales"))||0,salesHistory=JSON.parse(localStorage.getItem("salesHistory"))||[totalSales],currentCategory="Todos";
 
-    const productsContainer = document.getElementById("products");
-    const balanceElem = document.getElementById("balance");
-    const totalSalesElem = document.getElementById("total-sales");
-    const welcomeElem = document.getElementById("welcome");
+const productsContainer=document.getElementById("products");
+const balanceElem=document.getElementById("balance");
+const totalSalesElem=document.getElementById("total-sales");
+const welcomeElem=document.getElementById("welcome");
 
-    // Login Simulado
-    function login(){
-        const input = document.getElementById("username");
-        username = input.value.trim();
-        if(username===""){ alert("Digite seu nome!"); return; }
-        welcomeElem.innerText = `Olá, ${username}!`;
-        input.style.display="none";
-        input.nextElementSibling.style.display="none";
-        alert(`Bem-vindo(a), ${username}!`);
-        updateDashboard();
-    }
+function login(){
+    const input=document.getElementById("username");
+    username=input.value.trim();
+    if(username===""){ alert("Digite seu nome!"); return; }
+    welcomeElem.innerText=`Olá, ${username}!`;
+    input.style.display="none";
+    input.nextElementSibling.style.display="none";
+    alert(`Bem-vindo(a), ${username}!`);
+    updateDashboard();
+}
 
-    // Render produtos
-    function renderProducts(){
-        productsContainer.innerHTML="";
-        let filtered = currentCategory==="Todos"?products:products.filter(p=>p.category===currentCategory);
-        filtered.forEach(p=>{
-            const div=document.createElement("div");
-            div.classList.add("product");
-            div.innerHTML=`
-                <img src="${p.img}" alt="${p.name}">
-                <h3>${p.name}</h3>
-                <p>$${p.price}</p>
-                <p>Categoria: ${p.category}</p>
-                <button onclick="addToCart(${p.id})">Adicionar ao Carrinho</button>
-            `;
-            productsContainer.appendChild(div);
-        });
-    }
+function renderProducts(){
+    productsContainer.innerHTML="";
+    let filtered=currentCategory==="Todos"?products:products.filter(p=>p.category===currentCategory);
+    filtered.forEach(p=>{
+        const div=document.createElement("div");
+        div.classList.add("product");
+        div.innerHTML=`<img src="${p.img}" alt="${p.name}"><h3>${p.name}</h3><p>$${p.price}</p><p>Categoria: ${p.category}</p><button onclick="addToCart(${p.id})">Adicionar ao Carrinho</button>`;
+        productsContainer.appendChild(div);
+    });
+}
 
-    function filterCategory(category){
-        currentCategory=category;
-        document.querySelectorAll(".category").forEach(c=>c.classList.remove("active"));
-        document.querySelectorAll(".category").forEach(c=>{if(c.innerText===category)c.classList.add("active");});
-        renderProducts();
-    }
-
-    function addToCart(id){
-        const product = products.find(p=>p.id===id);
-        cart.push(product);
-        saveCart();
-        updateCart();
-        alert(`${product.name} adicionado ao carrinho!`);
-    }
-
-    function removeFromCart(index){
-        cart.splice(index,1);
-        saveCart();
-        updateCart();
-    }
-
-    function toggleCart(){
-        const cartItems = document.getElementById("cart-items");
-        cartItems.style.display = cartItems.style.display==="block"?"none":"block";
-    }
-
-    function updateCart(){
-        const cartList = document.getElementById("cart-list");
-        const cartCount = document.getElementById("cart-count");
-        const cartTotal = document.getElementById("cart-total");
-        cartList.innerHTML="";
-        let total=0;
-        cart.forEach((item,index)=>{
-            total+=item.price;
-            const li=document.createElement("li");
-            li.innerHTML=`${item.name} - $${item.price} <button onclick="removeFromCart(${index})">X</button>`;
-            cartList.appendChild(li);
-        });
-        cartCount.innerText=cart.length;
-        cartTotal.innerText=total.toFixed(2);
-    }
-
-    function checkout(){
-        let total = cart.reduce((acc,item)=>acc+item.price,0);
-        if(total>balance){ alert("Saldo insuficiente!"); return; }
-        balance-=total;
-        totalSales+=total;
-        salesHistory.push(totalSales);
-        cart=[];
-        saveCart();
-        updateCart();
-        updateDashboard();
-        drawChart();
-        alert("Compra realizada com sucesso!");
-    }
-
-    function updateDashboard(){
-        balanceElem.innerText=balance.toFixed(2);
-        totalSalesElem.innerText=totalSales.toFixed(2);
-    }
-
-    function saveCart(){
-        localStorage.setItem("cart", JSON.stringify(cart));
-        localStorage.setItem("balance", balance);
-        localStorage.setItem("totalSales", totalSales);
-        localStorage.setItem("salesHistory", JSON.stringify(salesHistory));
-    }
-
-    // Gráfico de vendas
-    const canvas=document.getElementById("salesChart");
-    const ctx=canvas.getContext("2d");
-    function drawChart(){
-        ctx.clearRect(0,0,canvas.width,canvas.height);
-        ctx.beginPath();
-        ctx.strokeStyle="#1a73e8";
-        ctx.lineWidth=2;
-        for(let i=0;i<salesHistory.length;i++){
-            let x=i*(canvas.width/salesHistory.length);
-            let y=canvas.height - (salesHistory[i]/Math.max(...salesHistory)*canvas.height*0.8);
-            if(i===0) ctx.moveTo(x,y);
-            else ctx.lineTo(x,y);
-        }
-        ctx.stroke();
-    }
-
+function filterCategory(category){
+    currentCategory=category;
+    document.querySelectorAll(".category").forEach(c=>c.classList.remove("active"));
+    document.querySelectorAll(".category").forEach(c=>{if(c.innerText===category)c.classList.add("active");});
     renderProducts();
+}
+
+function addToCart(id){
+    const product=products.find(p=>p.id===id);
+    cart.push(product);
+    saveCart();
+    updateCart();
+    alert(`${product.name} adicionado ao carrinho!`);
+}
+
+function removeFromCart(index){
+    cart.splice(index,1);
+    saveCart();
+    updateCart();
+}
+
+function toggleCart(){
+    const cartItems=document.getElementById("cart-items");
+    cartItems.style.display=cartItems.style.display==="block"?"none":"block";
+}
+
+function updateCart(){
+    const cartList=document.getElementById("cart-list");
+    const cartCount=document.getElementById("cart-count");
+    const cartTotal=document.getElementById("cart-total");
+    cartList.innerHTML="";
+    let total=0;
+    cart.forEach((item,index)=>{
+        total+=item.price;
+        const li=document.createElement("li");
+        li.innerHTML=`${item.name} - $${item.price} <button onclick="removeFromCart(${index})">X</button>`;
+        cartList.appendChild(li);
+    });
+    cartCount.innerText=cart.length;
+    cartTotal.innerText=total.toFixed(2);
+}
+
+function checkout(){
+    let total=cart.reduce((acc,item)=>acc+item.price,0);
+    if(total>balance){ alert("Saldo insuficiente!"); return; }
+    balance-=total;
+    totalSales+=total;
+    salesHistory.push(totalSales);
+    cart=[];
+    saveCart();
     updateCart();
     updateDashboard();
     drawChart();
+    alert("Compra realizada com sucesso!");
+}
+
+function updateDashboard(){
+    balanceElem.innerText=balance.toFixed(2);
+    totalSalesElem.innerText=totalSales.toFixed(2);
+}
+
+function saveCart(){
+    localStorage.setItem("cart",JSON.stringify(cart));
+    localStorage.setItem("balance",balance);
+    localStorage.setItem("totalSales",totalSales);
+    localStorage.setItem("salesHistory",JSON.stringify(salesHistory));
+}
+
+const canvas=document.getElementById("salesChart");
+const ctx=canvas.getContext("2d");
+function drawChart(){
+    ctx.clearRect(0,0,canvas.width,canvas.height);
+    ctx.beginPath();
+    ctx.strokeStyle="#1a73e8";
+    ctx.lineWidth=2;
+    for(let i=0;i<salesHistory.length;i++){
+        let x=i*(canvas.width/salesHistory.length);
+        let y=canvas.height-(salesHistory[i]/Math.max(...salesHistory)*canvas.height*0.8);
+        if(i===0) ctx.moveTo(x,y);
+        else ctx.lineTo(x,y);
+    }
+    ctx.stroke();
+}
+
+renderProducts();
+updateCart();
+updateDashboard();
+drawChart();
 </script>
 
 </body>
